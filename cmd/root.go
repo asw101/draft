@@ -28,7 +28,7 @@ To start a k8s deployment with draft, run the 'draft create' command 🤩
 
 This will prompt you to create a Dockerfile and deployment files for your project ✨
 
-For more information, please visit the Draft Github page: https://github.com/Azure/draft.`,
+For more information, please visit the Draft GitHub repo: https://github.com/Azure/draft.`,
 
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
 		if verbose {
