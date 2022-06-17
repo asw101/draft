@@ -96,10 +96,11 @@ func (l *Languages) PopulateConfigs() {
 	}
 }
 
-func CreateLanguagesFromEmbedFS(dockerfileTemplates embed.FS, dest string) *Languages {
+func CreateLanguagesFromEmbedFS(dockerfileTemplates embed.FS, dest string) (*Languages, error) {
 	langMap, err := embedutils.EmbedFStoMap(dockerfileTemplates, parentDirName)
+
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 
 	l := &Languages{
@@ -110,5 +111,5 @@ func CreateLanguagesFromEmbedFS(dockerfileTemplates embed.FS, dest string) *Lang
 	}
 	l.PopulateConfigs()
 
-	return l
+	return l, nil
 }

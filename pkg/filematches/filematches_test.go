@@ -47,11 +47,14 @@ func TestCreateK8sFileMatchesValidFile(t *testing.T) {
 	}
 	file_name := file.Name()
 
-	fileMatches := createK8sFileMatches(dir)
+	fileMatches, err := createK8sFileMatches(dir)
+	if err != nil {
+		t.Error(err)
+	}
 	assert.True(t, fileMatches.hasDeploymentFiles(), "should have valid deployment files")
 
 	os.Remove(file_name)
-	fileMatches = createK8sFileMatches(dir)
+	fileMatches, _ = createK8sFileMatches(dir)
 	assert.False(t, fileMatches.hasDeploymentFiles(), "should not have valid deployment files")
 }
 
@@ -68,7 +71,7 @@ func TestCreateK8sFileMatchesInvalidFile(t *testing.T) {
 	}
 	file_name := file.Name()
 
-	fileMatches := createK8sFileMatches(dir)
+	fileMatches, _ := createK8sFileMatches(dir)
 	assert.False(t, fileMatches.hasDeploymentFiles(), "should not have valid deployment files")
 
 	os.Remove(file_name)
@@ -93,11 +96,11 @@ func TestCreateK8sFileMatchesNestedValidFile(t *testing.T) {
 	}
 	file_name := file.Name()
 
-	fileMatches := createK8sFileMatches(dir)
+	fileMatches, _ := createK8sFileMatches(dir)
 	assert.True(t, fileMatches.hasDeploymentFiles(), "should have valid deployment files")
 
 	os.Remove(file_name)
-	fileMatches = createK8sFileMatches(dir)
+	fileMatches, _ = createK8sFileMatches(dir)
 	assert.False(t, fileMatches.hasDeploymentFiles(), "should not have valid deployment files")
 }
 
@@ -120,7 +123,7 @@ func TestCreateK8sFileMatchesNestedInvalidFile(t *testing.T) {
 	}
 	file_name := file.Name()
 
-	fileMatches := createK8sFileMatches(dir)
+	fileMatches, _ := createK8sFileMatches(dir)
 	assert.False(t, fileMatches.hasDeploymentFiles(), "should not have valid deployment files")
 
 	os.Remove(file_name)

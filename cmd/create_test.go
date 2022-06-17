@@ -123,7 +123,10 @@ func (mcc *createCmd) mockDetectLanguage() (*config.DraftConfig, string, error) 
 		}
 	}
 
-	mcc.supportedLangs = languages.CreateLanguagesFromEmbedFS(template.Dockerfiles, mcc.dest)
+	mcc.supportedLangs, err = languages.CreateLanguagesFromEmbedFS(template.Dockerfiles, mcc.dest)
+	if err != nil {
+		return nil, "", err
+	}
 
 	if mcc.createConfig.LanguageType != "" {
 		log.Debug("using configuration language")

@@ -92,10 +92,10 @@ func (d *Deployments) PopulateConfigs() {
 	}
 }
 
-func CreateDeploymentsFromEmbedFS(deploymentTemplates embed.FS, dest string) *Deployments {
+func CreateDeploymentsFromEmbedFS(deploymentTemplates embed.FS, dest string) (*Deployments, error) {
 	deployMap, err := embedutils.EmbedFStoMap(deploymentTemplates, "deployments")
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 
 	d := &Deployments{
@@ -106,5 +106,5 @@ func CreateDeploymentsFromEmbedFS(deploymentTemplates embed.FS, dest string) *De
 	}
 	d.PopulateConfigs()
 
-	return d
+	return d, nil
 }
