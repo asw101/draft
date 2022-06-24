@@ -135,7 +135,11 @@ func isValidGhRepo(repo string) error {
 	listReposCmd := exec.Command("gh", "repo", "view", repo)
 	_, err := listReposCmd.CombinedOutput()
 	if err != nil {
+<<<<<<< HEAD
 		log.Fatal("GitHub repo not found")
+=======
+		log.Println("GitHub repo not found")
+>>>>>>> 7e86e1e (Return errors only vs bool/error, tests, etc.)
 		return err
 	}
 	return nil
