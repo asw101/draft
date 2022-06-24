@@ -28,7 +28,7 @@ type SetUpCmd struct {
 func InitiateAzureOIDCFlow(sc *SetUpCmd, s spinner.Spinner) error {
 	log.Debug("Commencing github connection with azure...")
 
-	if !HasGhCli() || !IsLoggedInToGh() {
+	if !HasGhCli() || IsLoggedInToGh() != nil {
 		s.Stop()
 		if err := LogInToGh(); err != nil {
 			return err
@@ -92,7 +92,7 @@ func (sc *SetUpCmd) createAzApp() error {
 
 		out, err := createAppCmd.CombinedOutput()
 		if err != nil {
-			log.Printf("%s\n", out)
+			log.Debugf("%s\n", out)
 			return err
 		}
 
