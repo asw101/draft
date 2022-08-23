@@ -211,12 +211,7 @@ func (sc *SetUpCmd) ValidateSetUpConfig() error {
 		return errors.New("invalid app name")
 	}
 
-<<<<<<< HEAD
 	if err := isValidGhRepo(sc.Repo); err != nil {
-=======
-	err := isValidGhRepo(sc.Repo)
-	if err != nil {
->>>>>>> 7e86e1e (Return errors only vs bool/error, tests, etc.)
 		return err
 	}
 
